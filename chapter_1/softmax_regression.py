@@ -39,13 +39,16 @@ tf.global_variables_initializer().run()
 print('start training...')
 
 # 进行1000步梯度下降
-for _ in range(1000):
+for i in range(1000):
     # 在mnist.train中取100个训练数据
     # batch_xs是形状为(100, 784)的图像数据，batch_ys是形如(100, 10)的实际标签
     # batch_xs, batch_ys对应着两个占位符x和y_
     batch_xs, batch_ys = mnist.train.next_batch(100)
     # 在Session中运行train_step，运行时要传入占位符的值
+    sess.run(cross_entropy, feed_dict={x: batch_xs, y_: batch_ys})
     sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})
+    print("第%s次迭代,损失:%s,",i,cross_entropy.eval())  # 0.9185
+
 
 # 正确的预测结果
 correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
