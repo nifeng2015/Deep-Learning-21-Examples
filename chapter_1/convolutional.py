@@ -29,6 +29,7 @@ if __name__ == '__main__':
     x = tf.placeholder(tf.float32, [None, 784])
     y_ = tf.placeholder(tf.float32, [None, 10])
 
+
     # 将单张图片从784维向量重新还原为28x28的矩阵图片
     x_image = tf.reshape(x, [-1, 28, 28, 1])
 
